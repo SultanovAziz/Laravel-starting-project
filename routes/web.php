@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/hellow',function (){
+   return 'Hellow world';
+});
+
+Route::get('home',function (){
+    $name = 'aziz';
+    $age = 2021-2001;
+   return view('home',compact('name','age'));
+});
