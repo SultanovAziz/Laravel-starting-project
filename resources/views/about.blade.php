@@ -8,10 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hellow home!</h1>
-    <h2>{{$name}}</h2>
-    <h2>{{$age}}</h2>
-    {{route('posts',['id' => 3,'slug' => 'textArea'])}}<br>
-    {{route('admin.posts',['id' => 5])}}
+    <h1><a href="{{route('contact')}}">This is our contact</a></h1>
+    <h1>{{$name}}</h1>
 </body>
 </html>

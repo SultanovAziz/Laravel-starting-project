@@ -8,10 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hellow home!</h1>
-    <h2>{{$name}}</h2>
-    <h2>{{$age}}</h2>
-    {{route('posts',['id' => 3,'slug' => 'textArea'])}}<br>
-    {{route('admin.posts',['id' => 5])}}
+    <form action="{{route('contact')}}" method="post">
+        @csrf
+        <input type="text" name="firstname" placeholder="First name">
+        <input type="text" name="lastname" placeholder="Last name">
+        <input type="submit" value="Send">
+    </form>
 </body>
 </html>
