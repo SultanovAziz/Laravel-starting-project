@@ -9,14 +9,9 @@
 </head>
 <body>
 
-<h1>Hello, world!</h1>
+<h1>Test Page</h1>
 
-{{ $res }} <br>
-{{ $name }}
-<br>
-{{ route('post', ['id' => 3, 'slug' => 'test-2']) }}
-<br>
-{{ route('admin.post', ['id' => 3]) }}
+{{ $test }}
 
 </body>
 </html>

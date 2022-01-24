@@ -5,18 +5,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>404 - Not Found</title>
 </head>
 <body>
 
-<h1>Hello, world!</h1>
-
-{{ $res }} <br>
-{{ $name }}
-<br>
-{{ route('post', ['id' => 3, 'slug' => 'test-2']) }}
-<br>
-{{ route('admin.post', ['id' => 3]) }}
+<h1>{{ $exception->getMessage() }}</h1>
 
 </body>
 </html>

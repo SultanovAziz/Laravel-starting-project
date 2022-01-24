@@ -9,14 +9,15 @@
 </head>
 <body>
 
-<h1>Hello, world!</h1>
-
-{{ $res }} <br>
-{{ $name }}
-<br>
-{{ route('post', ['id' => 3, 'slug' => 'test-2']) }}
-<br>
-{{ route('admin.post', ['id' => 3]) }}
+<form action="{{ route('contact') }}" method="post">
+    {{-- csrf_field() --}}
+    {{-- method_field('PUT') --}}
+    @method('PUT')
+    @csrf
+    <input type="text" name="name">
+    <input type="email" name="email">
+    <button type="submit">Submit</button>
+</form>
 
 </body>
 </html>
