@@ -9,11 +9,12 @@
 </head>
 <body>
 
-<h1>Hello, world!</h1>
-
-{{ $res }} <br>
-{{ $name }}
-
+<form action="{{ route('posts.update' , ['slug' => $id]) }}" method="post">
+    @csrf
+    @method('PUT')
+    <input type="text" name="title">
+    <button type="submit">Submit</button>
+</form>
 
 </body>
 </html>

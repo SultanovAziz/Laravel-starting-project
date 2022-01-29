@@ -9,11 +9,11 @@
 </head>
 <body>
 
-<h1>Hello, world!</h1>
-
-{{ $res }} <br>
-{{ $name }}
-
+<form action="{{ route('posts.store') }}" method="post">
+    @csrf
+    <input type="text" name="title">
+    <button type="submit">Submit</button>
+</form>
 
 </body>
 </html>
