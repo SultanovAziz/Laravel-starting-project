@@ -10,37 +10,32 @@ class HomeController extends Controller
 {
     public function index()
     {
-//        dump($_ENV["MY_SETTING"]);
-//        dump(config('database.connections.mysql.username'));
-//
-////        dump($_ENV);
-//        for ($i = 4 ;$i<9;$i++){
-//            DB::insert('INSERT INTO posts(title,content) VALUES (?,?)',["Статья $i","Hellow world $i"]);
-//        }
-//
-//        $query = DB::insert('INSERT INTO posts(title,content) VALUES (?,?)',["Статья 3",'Hellow world']);
-//        var_dump($query);
 
-        DB::beginTransaction();
-        try {
-            DB::update("UPDATE posts SET created_at=:created_date WHERE created_at IS NULL",['created_date' => NOW()]);
-            DB::update("UPDATE posts SET updated_at=:updated_date WHERE updated_at IS NULL",['updated_date' => NOW()]);
-            DB::commit();
-        }catch (\Exception $e){
-            DB::rollBack();
-            echo $e->getMessage();
-        }
-
-
-
-        DB::update('UPDATE posts SET content=:content WHERE title=:name',['content'=>'Ок ВСЕ ХОРОШО','name' => 'Статья 5']);
-        $posts = DB::select('SELECT * FROM posts WHERE id > :id',['id' => 2]);
-        return dd($posts);
-
-
-
+        $tjk = DB::select('SELECT * FROM country WHERE Code LIKE :tjk',['tjk' => 'TJK']);
+        dump($tjk);
 //        $data = DB::table('country')->limit(5)->get();
-//        dump($data);
+//        $data = DB::table('country')->select('Code','Name')->limit(5)->get();
+//        $data = DB::table('country')->select('Code','Name')->first();
+//        $data = DB::table('country')->select('Code','Name')->orderBy('Name','DESC')->first();
+//        $data = DB::table('city')->select('ID','Name' )->find(2);
+//        $data = DB::table('city')->select('ID','Name')->where('Name','LIKE','Dushanbe')->get();
+//        $data = DB::table('city')->select('ID','Name')->where('Name','Dushanbe')->get();
+//        $data = DB::table('city')->select('ID','Name')->where([
+//            ['ID','>',1],
+//            ['ID','<',5],
+//        ])->get();
+//        $data = DB::table('country')->limit(10)->pluck('Name','Code');
+//        $data = DB::table('country')->count();
+//        $data = DB::table('country')->max('Population');
+//        $data = DB::table('country')->sum('Population');
+//        $data = DB::table('country')->avg('Population');
+//        $data = DB::table('city')->select('CountryCode')->distinct()->get();
+        $data = DB::table('city')->select('city.ID','city.Name as city_name','country.Code','country.Name as country_name')->limit(10)
+            ->join('country','city.CountryCode','=','country.Code')
+            ->orderBy('city.ID')
+            ->get();
+        dd($data);
+
 
         return view('home',['res' => 5,'name' => 'Aziz']);
     }
