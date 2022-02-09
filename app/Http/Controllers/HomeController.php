@@ -4,8 +4,10 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Country;
 use App\Models\Posts;
 use Illuminate\Support\Facades\DB;
+use SebastianBergmann\Diff\Exception;
 
 class HomeController extends Controller
 {
@@ -37,10 +39,45 @@ class HomeController extends Controller
 //            ->get();
 //        dd($data);
 
-        $post = new Posts();
-        $post->title = 'New page';
-        $post->save();
+//        $data = Country::all();
+//        $data = Country::limit(5)->get();
+//        $data = Country::query()->limit(5)->get();
+//        $data = Country::limit(6)->get();
+//        $data = Country::select('Code','Name')->where('Code','<','ALB')->get();
+//        $data = Country::select('Code','Name')->where('Code','<','ALB')->offset(1)->limit(3)->get();
+//        $data = Country::find('TJK');
+
+//         $post = new Posts();
+//         $post->title = 'New Posts';
+//         $post->content = 'Ok.. Lets Go!!';
+//         $post->save();
+
+//        Posts::create(['title' => 'TJK','content'=> 'Tajikistan feel the frendship']);
+
+//        $post = new Posts();
+//        $post->fill(['title' => 'hellow','content' => 'ok google']);
+//        $post->save();
+
+//        $post = Posts::find(6);
+//        $post->title = 'Hellow';
+//        $post->content = $this->reNameFunction($post->content);
+//        $post->save();
+
+//        Posts::where([
+//            ['id','>',1],
+//            ['id','<',5],
+//        ] )
+//            ->update(['updated_at' => NOW()]);
+
+//        $post = Posts::find(5);
+//        $post->delete();
+
+//        Posts::destroy(1,2);
 
         return view('home',['res' => 5,'name' => 'Aziz']);
+    }
+
+    public function reNameFunction($name){
+        return str_replace(' ','',ucwords(str_replace('-',' ',$name)));
     }
 }

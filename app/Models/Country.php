@@ -7,19 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Posts
+ * Class Country
  * @package App\Models
  * @mixin Builder
  */
-
-class Posts extends Model
+class Country extends Model
 {
     use HasFactory;
-//    protected $table = 'posts';
-//    protected $primaryKey = 'posts_id';
-    protected $attributes = [
-        'content' => 'Lorem ipsum...',
-    ];
-    protected $fillable = ['title','content'];
+    protected $table = 'country';
+    protected $primaryKey = 'Code';
+    public $incrementing = false;
 
 }
