@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Posts;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -30,12 +31,15 @@ class HomeController extends Controller
 //        $data = DB::table('country')->sum('Population');
 //        $data = DB::table('country')->avg('Population');
 //        $data = DB::table('city')->select('CountryCode')->distinct()->get();
-        $data = DB::table('city')->select('city.ID','city.Name as city_name','country.Code','country.Name as country_name')->limit(10)
-            ->join('country','city.CountryCode','=','country.Code')
-            ->orderBy('city.ID')
-            ->get();
-        dd($data);
+//        $data = DB::table('city')->select('city.ID','city.Name as city_name','country.Code','country.Name as country_name')->limit(10)
+//            ->join('country','city.CountryCode','=','country.Code')
+//            ->orderBy('city.ID')
+//            ->get();
+//        dd($data);
 
+        $post = new Posts();
+        $post->title = 'New page';
+        $post->save();
 
         return view('home',['res' => 5,'name' => 'Aziz']);
     }
