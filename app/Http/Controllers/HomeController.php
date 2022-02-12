@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Country;
 use App\Models\Posts;
+use App\Models\Rubric;
 use Illuminate\Support\Facades\DB;
 use SebastianBergmann\Diff\Exception;
 
@@ -73,6 +74,10 @@ class HomeController extends Controller
 //        $post->delete();
 
 //        Posts::destroy(1,2);
+
+        $post = Posts::find(2);
+
+        dd($post->rubric->title,$post->title);
 
         return view('home',['res' => 5,'name' => 'Aziz']);
     }
