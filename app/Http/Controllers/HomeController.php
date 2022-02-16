@@ -7,7 +7,9 @@ namespace App\Http\Controllers;
 use App\Models\Country;
 use App\Models\Posts;
 use App\Models\Rubric;
+use Doctrine\DBAL\Schema\Schema;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\DocBlock\Tag;
 use SebastianBergmann\Diff\Exception;
 
 class HomeController extends Controller
@@ -15,70 +17,34 @@ class HomeController extends Controller
     public function index()
     {
 
-        $tjk = DB::select('SELECT * FROM country WHERE Code LIKE :tjk',['tjk' => 'TJK']);
-        dump($tjk);
-//        $data = DB::table('country')->limit(5)->get();
-//        $data = DB::table('country')->select('Code','Name')->limit(5)->get();
-//        $data = DB::table('country')->select('Code','Name')->first();
-//        $data = DB::table('country')->select('Code','Name')->orderBy('Name','DESC')->first();
-//        $data = DB::table('city')->select('ID','Name' )->find(2);
-//        $data = DB::table('city')->select('ID','Name')->where('Name','LIKE','Dushanbe')->get();
-//        $data = DB::table('city')->select('ID','Name')->where('Name','Dushanbe')->get();
-//        $data = DB::table('city')->select('ID','Name')->where([
-//            ['ID','>',1],
-//            ['ID','<',5],
-//        ])->get();
-//        $data = DB::table('country')->limit(10)->pluck('Name','Code');
-//        $data = DB::table('country')->count();
-//        $data = DB::table('country')->max('Population');
-//        $data = DB::table('country')->sum('Population');
-//        $data = DB::table('country')->avg('Population');
-//        $data = DB::table('city')->select('CountryCode')->distinct()->get();
-//        $data = DB::table('city')->select('city.ID','city.Name as city_name','country.Code','country.Name as country_name')->limit(10)
-//            ->join('country','city.CountryCode','=','country.Code')
-//            ->orderBy('city.ID')
-//            ->get();
-//        dd($data);
 
-//        $data = Country::all();
-//        $data = Country::limit(5)->get();
-//        $data = Country::query()->limit(5)->get();
-//        $data = Country::limit(6)->get();
-//        $data = Country::select('Code','Name')->where('Code','<','ALB')->get();
-//        $data = Country::select('Code','Name')->where('Code','<','ALB')->offset(1)->limit(3)->get();
-//        $data = Country::find('TJK');
 
-//         $post = new Posts();
-//         $post->title = 'New Posts';
-//         $post->content = 'Ok.. Lets Go!!';
-//         $post->save();
+//        $rubric = Posts::find(2)->rubric;
+//        dd($rubric->title);
+//        $posts = Rubric::find(1)->posts;
+//        dd($posts[0]->content);
+//        $post = [];
+//        foreach (Posts::get() as $poss) {
+//            $post[]= ['post' => $poss->title,'rubric' => $poss->rubric->title];
+//        }
+//        //жадная загрузка
+//        foreach (Posts::with('rubric')->get() as $poss) {
+//            $post[]= ['post' => $poss->title,'rubric' => $poss->rubric->title];
+//        }
+//        dd($post);
 
-//        Posts::create(['title' => 'TJK','content'=> 'Tajikistan feel the frendship']);
-
-//        $post = new Posts();
-//        $post->fill(['title' => 'hellow','content' => 'ok google']);
-//        $post->save();
-
-//        $post = Posts::find(6);
-//        $post->title = 'Hellow';
-//        $post->content = $this->reNameFunction($post->content);
-//        $post->save();
-
-//        Posts::where([
-//            ['id','>',1],
-//            ['id','<',5],
-//        ] )
-//            ->update(['updated_at' => NOW()]);
-
-//        $post = Posts::find(5);
-//        $post->delete();
-
-//        Posts::destroy(1,2);
-
-        $post = Posts::find(2);
-
-        dd($post->rubric->title,$post->title);
-
+//        $posts = Rubric::find(4)->posts()->select('title','content')->where('id','>',2)->get();
+//        dd($posts);
+//        $post = Posts::find(2);
+//        dump($post->title);
+//        foreach ($post->tag as $tag) {
+//            dump($tag->title);
+//        }
+        $tag = \App\Models\Tag::find(1);
+        dump($tag->title);
+        foreach ($tag->post as $posts) {
+            dump($posts->title);
+        }
         return view('home',['res' => 5,'name' => 'Aziz']);
     }
 

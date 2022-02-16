@@ -16,10 +16,11 @@ class Rubric extends Model
 {
     use HasFactory;
 
-    public function post()
+    public function posts()
     {
 //        return $this->hasOne('App\Models\Posts');
-        return $this->hasMany('App\Models\Posts');
+//        return $this->hasMany('App\Models\Posts');
+        return $this->hasMany(Posts::class);
 //        return $this->hasOne(Posts::class);
     }
 }

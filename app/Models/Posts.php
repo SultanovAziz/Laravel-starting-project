@@ -28,4 +28,8 @@ class Posts extends Model
         return $this->belongsTo(Rubric::class);
     }
 
+    public function tag(){
+        return $this->belongsToMany(Tag::class);
+    }
+
 }
