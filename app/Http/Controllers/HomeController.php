@@ -17,8 +17,9 @@ class HomeController extends Controller
     public function index()
     {
         $title = 'Home Page';
-        $h1 = '<h1>home page</h1>';
-        return view('home',compact('title','h1'));
+//        $posts = Posts::all();
+        $posts = Posts::orderBy('id','desc')->get();
+        return view('home',compact('title','posts'));
     }
 
     public function reNameFunction($name){
