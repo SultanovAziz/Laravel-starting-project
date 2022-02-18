@@ -9,6 +9,8 @@ class PageController extends Controller
 
     public function show()
     {
-        return view('page.about');
+        $title = 'About Page';
+        $h1 = '<h1>about page</h1>';
+        return view('page.about',compact('title','h1'));
     }
 }
