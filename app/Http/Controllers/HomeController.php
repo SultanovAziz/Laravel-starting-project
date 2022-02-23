@@ -10,6 +10,8 @@ use App\Models\Rubric;
 use Doctrine\DBAL\Schema\Schema;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Validator;
 use phpDocumentor\Reflection\DocBlock\Tag;
@@ -19,31 +21,25 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-//        $request->session()->put('test','Test value');
-//        session(['cart' =>
-//            [
-//                ['cart_id' => 1, 'title' => 'Product 1'],
-//                ['cart_id' => 2,'title' => 'Product 2'],
-//            ]]);
 
-//        dump($request->session()->get('cart')[1]['title']);
-//        dump(session('cart')[1]);
+//       Cookie::queue('test','Value');
+//        dump(Cookie::get('test'));
+//        if (Cookie::has('test')){
+//            dump(Cookie::get('test'));
+//        }
+        Cookie::queue(Cookie::forget('test'));
+        if(Cache::has('posts'))
+        {
+            $posts = Cache::get('posts');
+        }else{
+            $posts = Posts::orderBy('id','desc')->get();
+            Cache::put('posts',$posts,300);
+        }
 
-//        session()->push('cart',['cart_id' => 3,'title'=> 'Product 3']);
 
-//          dump($request->session()->pull('test'));
-//        dump(session()->forget('test'));
-
-//        session()->pull('cart.1');
-//        $i = 1;
-//        session()->forget('cart.' .$i);
-//        session()->flush();
-
-//        dump($request->session()->all());
-        dump(session()->all());
+//        $i = 2;
+//        dd(Cache::pull('posts'));
         $title = 'Home Page';
-//        $posts = Posts::all();
-        $posts = Posts::orderBy('id','desc')->get();
         return view('home',compact('title','posts'));
     }
 
@@ -66,20 +62,9 @@ class HomeController extends Controller
             'content' => 'required',
             'rubric_id' => 'integer'
         ]);
-//        $rules = [
-//            'title' => 'required|min:5|max:255',
-//            'content' => 'required',
-//            'rubric_id' => 'integer'
-//        ];
-//        $message = [
-//            'title.required' => 'Заполните поле названия',
-//            'title.min' => 'Поле должно быть заполнено минимум 5 символами',
-//            'title.max' => 'Поле должно быть заполнено максимум 255 символами',
-//            'content.required' => 'Заполните поле содержимого',
-//            'rubric_id.integer' => 'Выберите рубрику',
-//        ];
-//        $validate = \Illuminate\Support\Facades\Validator::make($request->all(),$rules,$message)->validate();
+
         Posts::create($request->all());
+
         session()->flash('success','Данные сохранены');
         return redirect()->route('home');
     }
