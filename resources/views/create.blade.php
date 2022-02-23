@@ -4,28 +4,55 @@
 
 @section('content')
     <div class="container">
-        <form method="post" action="{{ route('post.store') }}" class="mt-5">
+        <div class="container">
+            <div class="mt-5">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+        </div>
+        <form class="mt-5" method="post" action="{{ route('postt.store') }}">
+
             @csrf
-            <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Title" name="title" value="{{ old('title') }}">
+                @error('title')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-                <textarea class="form-control" id="content" rows="3" name="content" placeholder="Content"></textarea>
+
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea class="form-control @error('content') is-invalid @enderror" id="content" rows="5" name="content" placeholder="Content">{{ old('content') }}</textarea>
+                @error('content')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
+
             <div class="form-group">
                 <label for="rubric_id">Rubric</label>
-
-                <select class="form-select form-select-lg mb-3" name="rubric_id" aria-label=".form-select-lg example">
-                    <option >Selected rubric</option>
-                    @foreach($posts as $k => $v)
-                        <option value="{{ $k }}">{{ $v }}</option>
+                <select class="form-control" id="rubric_id" name="rubric_id">
+                    <option>Select rubric</option>
+                    @foreach($rubrics as $k => $v)
+                        <option value="{{ $k }}"
+                                @if(old('rubric_id') == $k) selected @endif
+                        >{{ $v }}</option>
                     @endforeach
                 </select>
-            </div>
+                @error('rubric_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div></br>
 
-            <button type="submit" class="btn btn-primary ">Submit</button>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
         </form>
     </div>
 @endsection
