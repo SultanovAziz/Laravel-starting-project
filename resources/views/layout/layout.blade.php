@@ -52,8 +52,12 @@
 
 <main>
 
+    <div class="container">
+        @include('layout.alerts')
+    </div>
     @yield('content')
     @yield('text')
+
 
 </main>
 

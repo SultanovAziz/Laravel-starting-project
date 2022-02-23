@@ -4,21 +4,8 @@
 
 @section('content')
     <div class="container">
-        <div class="container">
-            <div class="mt-5">
-                @if($errors->any())
-                    <div class="alert alert-danger">
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </div>
-                @endif
-            </div>
-        </div>
         <form class="mt-5" method="post" action="{{ route('postt.store') }}">
-
             @csrf
-
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Title" name="title" value="{{ old('title') }}">
