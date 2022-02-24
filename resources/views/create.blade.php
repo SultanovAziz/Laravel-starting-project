@@ -43,3 +43,9 @@
         </form>
     </div>
 @endsection
+
+@section('script')
+    <script>
+        alert('Create');
+    </script>
+@endsection
