@@ -45,12 +45,6 @@
 @endsection
 
 
-@section('script')
-    <script>
-        alert('Home');
-    </script>
-@endsection
-
 
 
 

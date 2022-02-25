@@ -9,4 +9,4 @@ Route::post('/','HomeController@store')->name('postt.store');
 
 Route::get('page/about','PageController@show')->name('page.about');
 
-
+Route::get('/send','ContactController@send');
