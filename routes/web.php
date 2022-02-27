@@ -9,4 +9,5 @@ Route::post('/','HomeController@store')->name('postt.store');
 
 Route::get('page/about','PageController@show')->name('page.about');
 
-Route::get('/send','ContactController@send');
+//Route::get('/send','ContactController@send');
+Route::match(['get','post'],'/send','ContactController@send')->name('send');

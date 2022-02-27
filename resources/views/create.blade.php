@@ -24,7 +24,7 @@
 
             <div class="form-group">
                 <label for="rubric_id">Rubric</label>
-                <select class="form-control" id="rubric_id" name="rubric_id">
+                <select class="form-control @error('rubric_id') is-invalid @enderror" id="rubric_id" name="rubric_id">
                     <option>Select rubric</option>
                     @foreach($rubrics as $k => $v)
                         <option value="{{ $k }}"
@@ -44,8 +44,3 @@
     </div>
 @endsection
 
-@section('script')
-    <script>
-        alert('Create');
-    </script>
-@endsection
